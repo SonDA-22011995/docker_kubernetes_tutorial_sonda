@@ -9,6 +9,16 @@
     - [Docker Hub](#docker-hub)
     - [Docker Enterprise Edition](#docker-enterprise-edition)
   - [Containers vs Virtual Machines](#containers-vs-virtual-machines)
+  - [Docker components](#docker-components)
+    - [Docker Architecture Overview](#docker-architecture-overview)
+      - [The Docker Client](#the-docker-client)
+      - [B. The Docker Host](#b-the-docker-host)
+      - [C. Image Registry (Container Registry)](#c-image-registry-container-registry)
+    - [Common Workflows](#common-workflows)
+      - [Scenario 1: Running a Container (`docker run`)](#scenario-1-running-a-container-docker-run)
+      - [Scenario 2: Building and Pushing (`docker build` \& `push`)](#scenario-2-building-and-pushing-docker-build--push)
+    - [Key Concepts to Remember](#key-concepts-to-remember)
+    - [Summary Table: Local vs. Remote](#summary-table-local-vs-remote)
 
 # Introduction to Containers
 
@@ -72,3 +82,69 @@
 | **Size/Overhead** | **Larger**: VMs have a larger footprint due to the guest OS and virtual hardware.                                                                          | **Lightweight**: Containers have minimal overhead, as they share the kernel.                                                                         |
 | **Portability**   | **Less portable**: VMs can be tied to specific hypervisors and guest OS configurations.                                                                    | **Highly portable**: Containers are platform-agnostic and run consistently.                                                                          |
 | **When to use**   | <ul><li>Need strong isolation between environments.</li><li>Dealing with legacy applications.</li><li>Replicating a complete system environment.</li></ul> | <ul><li>Building modern, cloud-native microservices.</li><li>Need to scale quickly and efficiently.</li><li>Portability is a top priority.</li></ul> |
+
+## Docker components
+
+### Docker Architecture Overview
+
+![Containers vs Virtual Machines](static/image/img0005.png)
+
+- The Three Main Components: A Docker system consists of three primary parts that interact via APIs.
+
+#### The Docker Client
+
+- **Definition:** The **Docker CLI** (Command Line Interface) used to issue commands.
+- **Function:** It translates user commands into **REST API calls** sent to the Docker Host.
+- **Flexibility:** The client can run locally or connect to a remote Docker Host (e.g., in the cloud).
+
+#### B. The Docker Host
+
+The environment where Docker objects are managed. It contains:
+
+- **Docker Daemon (`dockerd`):** The core engine that listens for API requests and manages images, containers, networks, and volumes.
+- **Image Cache:** Local storage for downloaded images.
+- **Containers:** The actual running (or stopped) instances of your applications.
+
+[Image of Docker architecture showing Client, Host, and Registry interaction]
+
+#### C. Image Registry (Container Registry)
+
+- **Definition:** A stateless, highly scalable server-side application that stores and lets you distribute Docker images.
+- **Docker Hub:** The default public registry.
+- **Function:** Used to share images. Registries can be **public** or **private**.
+
+---
+
+### Common Workflows
+
+#### Scenario 1: Running a Container (`docker run`)
+
+1. **Command:** You enter `docker run <image>` in the CLI.
+2. **API Call:** CLI sends a request to the Docker Host.
+3. **Daemon Check:** \* If the image is **NOT** in the local cache, the Daemon pulls it from the **Registry**.
+   - If the image **IS** in the local cache, it skips the download.
+4. **Execution:** The Daemon creates and starts the **Container**.
+
+> **Pro Tip:** Think of an **Image** as a **Class** (the blueprint) and a **Container** as an **Instance/Object** (the running entity).
+
+#### Scenario 2: Building and Pushing (`docker build` & `push`)
+
+1. **Build:** `docker build` sends the **Dockerfile** and **Context** to the Host. The Daemon builds the image and saves it in the **Image Cache**.
+2. **Push:** Images remain local by default. Use `docker push` to upload the image to a Registry.
+3. **Auth:** Pushing (or pulling from private repos) requires the Host to be **authenticated** (logged in).
+
+---
+
+### Key Concepts to Remember
+
+| Term              | Description                                              |
+| :---------------- | :------------------------------------------------------- |
+| **Docker Daemon** | The background process managing all Docker activities.   |
+| **Image**         | A read-only template used to create containers.          |
+| **Container**     | A runnable instance of an image.                         |
+| **Registry**      | A service that provides storage and delivery for images. |
+
+### Summary Table: Local vs. Remote
+
+- **Local Setup:** When using Docker Desktop, the **Client** and **Host** both run on your machine.
+- **Remote Setup:** You can point your local **Client** to a **Host** running on a server or cloud provider.
