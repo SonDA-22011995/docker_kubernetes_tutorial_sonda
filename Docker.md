@@ -129,9 +129,12 @@ This is where the actual "action" takes place. It contains:
 
 #### Scenario 2: Building and Pushing (`docker build` & `push`)
 
-1. **Build:** `docker build` sends the **Dockerfile** and **Context** to the Host. The Daemon builds the image and saves it in the **Image Cache**.
-2. **Push:** Images remain local by default. Use `docker push` to upload the image to a Registry.
-3. **Auth:** Pushing (or pulling from private repos) requires the Host to be **authenticated** (logged in).
+1. Issue `docker build` in the Docker CLI
+2. Docker CLI sends a request to the Docker host's REST API
+   - This also includes the respective **Dockerfile** and **Context**
+3. The Daemon builds the image according to the **Dockerfile** and saves it in the **Image Cache**.
+4. **Push:** Images remain local by default. Use `docker push` to upload the image to a Registry.
+5. **Auth:** Pushing (or pulling from private repos) requires the Host to be **authenticated** (logged in).
 
 ---
 
