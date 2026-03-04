@@ -8,6 +8,7 @@
     - [Docker Desktop](#docker-desktop)
     - [Docker Hub](#docker-hub)
     - [Docker Enterprise Edition](#docker-enterprise-edition)
+  - [Containers vs Virtual Machines](#containers-vs-virtual-machines)
 
 # Introduction to Containers
 
@@ -58,3 +59,18 @@
 ### Docker Enterprise Edition
 
 - Docker EE – now owned by Mirantis – consists of the Universal Control Plane (UCP) and the Docker Trusted Registry (DTR), both of which run on top of Docker Swarm. Both are Swarm applications. Docker EE builds on top of the upstream components of the Moby project and adds enterprise-grade features such as role-based access control (RBAC), multi-tenancy, mixed clusters of Docker Swarm and Kubernetes, a web-based UI, and content trust, as well as image scanning on top.
+
+## Containers vs Virtual Machines
+
+![Containers vs Virtual Machines](static/image/img0003.png)
+
+![Containers vs Virtual Machines](static/image/img0004.png)
+
+```
+| Feature | Virtual Machines (VMs) | Docker Containers |
+| :--- | :--- | :--- |
+| **Isolation** | **Strong isolation**: Each VM has its own OS, providing complete isolation. | **Process-level isolation**: Containers share the host OS kernel. |
+| **Size/Overhead** | **Larger**: VMs have a larger footprint due to the guest OS and virtual hardware. | **Lightweight**: Containers have minimal overhead, as they share the kernel. |
+| **Portability** | **Less portable**: VMs can be tied to specific hypervisors and guest OS configurations. | **Highly portable**: Containers are platform-agnostic and run consistently. |
+| **When to use** | <ul><li>Need strong isolation between environments.</li><li>Dealing with legacy applications.</li><li>Replicating a complete system environment.</li></ul> | <ul><li>Building modern, cloud-native microservices.</li><li>Need to scale quickly and efficiently.</li><li>Portability is a top priority.</li></ul> |
+```
