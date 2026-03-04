@@ -4,6 +4,10 @@
     - [But these days](#but-these-days)
       - [One of the first approaches was to use **virtual machines (VMs)**.](#one-of-the-first-approaches-was-to-use-virtual-machines-vms)
       - [The second approaches is a software packaging mechanism is the **Docker container**](#the-second-approaches-is-a-software-packaging-mechanism-is-the-docker-container)
+  - [Docker products](#docker-products)
+    - [Docker Desktop](#docker-desktop)
+    - [Docker Hub](#docker-hub)
+    - [Docker Enterprise Edition](#docker-enterprise-edition)
 
 # Introduction to Containers
 
@@ -30,3 +34,27 @@
 - Docker then coined the phrase Build, ship, and run anywhere
 
 ![But these days](static/image/img0002.png)
+
+## Docker products
+
+### Docker Desktop
+
+- Docker Desktop (along with Docker Toolbox) is a developer-focused application designed for building, debugging, and testing containerized apps on macOS, Windows, and Linux.
+
+- Key Takeaways
+  - Target Audience: Primarily built for developers.
+
+  - Functionality: Provides a complete development environment for the entire lifecycle (build, debug, and test) of dockerized services.
+
+  - Integration: Deeply integrated with the host OS's network, filesystem, and hypervisor framework.
+
+  - Performance: Recognized as the fastest and most reliable method to run Docker locally across different operating systems.
+
+### Docker Hub
+
+- Docker Hub is the most popular service for finding and sharing container images
+- Docker images can be uploaded and shared inside a team, an organization, or with the wider publi
+
+### Docker Enterprise Edition
+
+- Docker EE – now owned by Mirantis – consists of the Universal Control Plane (UCP) and the Docker Trusted Registry (DTR), both of which run on top of Docker Swarm. Both are Swarm applications. Docker EE builds on top of the upstream components of the Moby project and adds enterprise-grade features such as role-based access control (RBAC), multi-tenancy, mixed clusters of Docker Swarm and Kubernetes, a web-based UI, and content trust, as well as image scanning on top.
