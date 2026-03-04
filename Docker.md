@@ -66,11 +66,9 @@
 
 ![Containers vs Virtual Machines](static/image/img0004.png)
 
-```
-| Feature | Virtual Machines (VMs) | Docker Containers |
-| :--- | :--- | :--- |
-| **Isolation** | **Strong isolation**: Each VM has its own OS, providing complete isolation. | **Process-level isolation**: Containers share the host OS kernel. |
-| **Size/Overhead** | **Larger**: VMs have a larger footprint due to the guest OS and virtual hardware. | **Lightweight**: Containers have minimal overhead, as they share the kernel. |
-| **Portability** | **Less portable**: VMs can be tied to specific hypervisors and guest OS configurations. | **Highly portable**: Containers are platform-agnostic and run consistently. |
-| **When to use** | <ul><li>Need strong isolation between environments.</li><li>Dealing with legacy applications.</li><li>Replicating a complete system environment.</li></ul> | <ul><li>Building modern, cloud-native microservices.</li><li>Need to scale quickly and efficiently.</li><li>Portability is a top priority.</li></ul> |
-```
+| Feature           | Virtual Machines (VMs)                                                                                                                                     | Docker Containers                                                                                                                                    |
+| :---------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Isolation**     | **Strong isolation**: Each VM has its own OS, providing complete isolation.                                                                                | **Process-level isolation**: Containers share the host OS kernel.                                                                                    |
+| **Size/Overhead** | **Larger**: VMs have a larger footprint due to the guest OS and virtual hardware.                                                                          | **Lightweight**: Containers have minimal overhead, as they share the kernel.                                                                         |
+| **Portability**   | **Less portable**: VMs can be tied to specific hypervisors and guest OS configurations.                                                                    | **Highly portable**: Containers are platform-agnostic and run consistently.                                                                          |
+| **When to use**   | <ul><li>Need strong isolation between environments.</li><li>Dealing with legacy applications.</li><li>Replicating a complete system environment.</li></ul> | <ul><li>Building modern, cloud-native microservices.</li><li>Need to scale quickly and efficiently.</li><li>Portability is a top priority.</li></ul> |
