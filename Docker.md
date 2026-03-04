@@ -15,7 +15,7 @@
       - [B. The Docker Host](#b-the-docker-host)
       - [C. Image Registry (Container Registry)](#c-image-registry-container-registry)
     - [Common Workflows](#common-workflows)
-      - [Scenario 1: Running a Container (`docker run`)](#scenario-1-running-a-container-docker-run)
+      - [Scenario 1: Running a Container (`docker run`) from an image](#scenario-1-running-a-container-docker-run-from-an-image)
       - [Scenario 2: Building and Pushing (`docker build` \& `push`)](#scenario-2-building-and-pushing-docker-build--push)
     - [Key Concepts to Remember](#key-concepts-to-remember)
     - [Summary Table: Local vs. Remote](#summary-table-local-vs-remote)
@@ -99,9 +99,9 @@
 
 #### B. The Docker Host
 
-The environment where Docker objects are managed. It contains:
+This is where the actual "action" takes place. It contains:
 
-- **Docker Daemon (`dockerd`):** The core engine that listens for API requests and manages images, containers, networks, and volumes.
+- **Docker Daemon:** The core engine that listens for API requests and manages images, containers, networks, and volumes.
 - **Image Cache:** Local storage for downloaded images.
 - **Containers:** The actual running (or stopped) instances of your applications.
 
@@ -117,13 +117,13 @@ The environment where Docker objects are managed. It contains:
 
 ### Common Workflows
 
-#### Scenario 1: Running a Container (`docker run`)
+#### Scenario 1: Running a Container (`docker run`) from an image
 
 1. **Command:** You enter `docker run <image>` in the CLI.
-2. **API Call:** CLI sends a request to the Docker Host.
+2. **API Call:** CLI sends a request to the Docker Host's REST API.
 3. **Daemon Check:** \* If the image is **NOT** in the local cache, the Daemon pulls it from the **Registry**.
    - If the image **IS** in the local cache, it skips the download.
-4. **Execution:** The Daemon creates and starts the **Container**.
+4. **Execution:** The Daemon Host instantiates a new **Container** based o the image.
 
 > **Pro Tip:** Think of an **Image** as a **Class** (the blueprint) and a **Container** as an **Instance/Object** (the running entity).
 
