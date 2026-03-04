@@ -14,6 +14,8 @@
 - Developers would develop new applications. Once an application was completed in their eyes, they would hand that application over to the operations engineers, who were then supposed to install it on the production servers and get it running. If the operations engineers were lucky, they even got a somewhat accurate document with installation instructions from the developers
 - Usually, each application has some external dependencies, such as which framework it was built on, what libraries it uses, and so on. Sometimes, two applications use the same framework but of different versions that might or might not be compatible with each other
 
+![In the old days](static\image\img0001.png)
+
 ### But these days
 
 #### One of the first approaches was to use **virtual machines (VMs)**.
@@ -24,3 +26,7 @@
 #### The second approaches is a software packaging mechanism is the **Docker container**
 
 - Developers package their applications, frameworks, and libraries into Docker containers, and then they ship those containers to the testers or operations engineers
+- The engineers know that if any container runs on their servers, then any other containers should run too
+- Docker then coined the phrase Build, ship, and run anywhere
+
+![But these days](static\image\img0002.png)
