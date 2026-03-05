@@ -19,6 +19,7 @@
       - [Scenario 2: Building and Pushing (`docker build` \& `push`)](#scenario-2-building-and-pushing-docker-build--push)
     - [Key Concepts to Remember](#key-concepts-to-remember)
     - [Summary Table: Local vs. Remote](#summary-table-local-vs-remote)
+- [Mastering Containers](#mastering-containers)
 
 # Introduction to Containers
 
@@ -151,3 +152,5 @@ This is where the actual "action" takes place. It contains:
 
 - **Local Setup:** When using Docker Desktop, the **Client** and **Host** both run on your machine.
 - **Remote Setup:** You can point your local **Client** to a **Host** running on a server or cloud provider.
+
+# Mastering Containers
