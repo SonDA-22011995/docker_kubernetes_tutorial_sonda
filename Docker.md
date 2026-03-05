@@ -21,6 +21,9 @@
     - [Summary Table: Local vs. Remote](#summary-table-local-vs-remote)
 - [Mastering Containers](#mastering-containers)
   - [Running the container](#running-the-container)
+    - [Create and run a new container from an image](#create-and-run-a-new-container-from-an-image)
+  - [Example](#example)
+    - [List containers](#list-containers)
   - [Container Lifecycle](#container-lifecycle)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
     - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
@@ -168,6 +171,49 @@ This is where the actual "action" takes place. It contains:
 docker version
 
 # or docker --version
+```
+
+### Create and run a new container from an image
+
+```
+docker container run [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+#short-command:
+docker run
+```
+
+- A quick reference guide for the most commonly used `docker run` options and flags.
+
+| Option      | Full Name       | Description                                              | Example                                             |
+| :---------- | :-------------- | :------------------------------------------------------- | :-------------------------------------------------- |
+| `-d`        | **Detached**    | Runs the container in the background (hidden).           | `docker run -d nginx`                               |
+| `-p`        | **Publish**     | Maps a port from the Container to your Host (Laptop).    | `docker run -p 8080:80 nginx`                       |
+| `--name`    | **Name**        | Assigns a custom name for easy management.               | `docker run --name my-web nginx`                    |
+| `-v`        | **Volume**      | Mounts a folder from your host into the container.       | `docker run -v C:/html:/usr/share/nginx/html nginx` |
+| `-e`        | **Env**         | Sets environment variables (passwords/API keys).         | `docker run -e MYSQL_ROOT_PASSWORD=123 mysql`       |
+| `--rm`      | **Remove**      | Automatically deletes the container when it stops.       | `docker run --rm alpine echo "Hello"`               |
+| `-it`       | **Interactive** | Connects your terminal to the container shell.           | `docker run -it ubuntu bash`                        |
+| `--network` | **Network**     | Connects the container to a specific Docker network.     | `docker run --network my-net nginx`                 |
+| `--restart` | **Restart**     | Defines if the container should restart on crash/reboot. | `docker run --restart always nginx`                 |
+| `-m`        | **Memory**      | Limits the maximum RAM the container can use.            | `docker run -m 512m nginx`                          |
+
+---
+
+## Example
+
+```bash
+docker run -d -p 80:80 --name prod-server -v /my/data:/usr/share/nginx/html nginx
+```
+
+### List containers
+
+```
+docker container ls [OPTIONS]
+
+#short-command
+docker ps
+docker container ps
+docker container list
 ```
 
 ## Container Lifecycle
