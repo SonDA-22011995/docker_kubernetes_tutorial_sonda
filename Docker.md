@@ -20,6 +20,10 @@
     - [Key Concepts to Remember](#key-concepts-to-remember)
     - [Summary Table: Local vs. Remote](#summary-table-local-vs-remote)
 - [Mastering Containers](#mastering-containers)
+  - [Running the container](#running-the-container)
+  - [Container Lifecycle](#container-lifecycle)
+  - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
+    - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
 
 # Introduction to Containers
 
@@ -154,3 +158,38 @@ This is where the actual "action" takes place. It contains:
 - **Remote Setup:** You can point your local **Client** to a **Host** running on a server or cloud provider.
 
 # Mastering Containers
+
+## Running the container
+
+- We want to make sure that Docker is installed correctly on your system and ready to
+  accept your commands. Open a new terminal window and type in the following command
+
+```
+docker version
+
+# or docker --version
+```
+
+## Container Lifecycle
+
+## Docker Cleanup Commands Reference
+
+| Command                         | Description                                                                    | Risk Level           |
+| :------------------------------ | :----------------------------------------------------------------------------- | :------------------- |
+| `docker system df`              | **Display** a summary of Docker disk usage.                                    | **Safe**             |
+| `docker system prune`           | Removes all stopped containers, unused networks, and **dangling** images.      | **Low**              |
+| `docker system prune -a`        | Removes **all** unused images (not just dangling ones) and stopped containers. | **Medium**           |
+| `docker system prune --volumes` | Same as `system prune` but also deletes **all unused volumes**.                | **High (Data Loss)** |
+| `docker image prune`            | Removes only dangling images (those tagged as `<none>`).                       | **Low**              |
+| `docker image prune -a`         | Removes all images not currently used by a container.                          | **Medium**           |
+| `docker container prune`        | Removes all stopped containers.                                                | **Low**              |
+| `docker volume prune`           | Removes all local volumes not used by at least one container.                  | **High (Data Loss)** |
+| `docker rm -f $(docker ps -aq)` | **Forcefully** stops and removes ALL containers.                               | **High**             |
+
+### 💡 Best Practices for Windows Developers
+
+- The "Auto-Cleanup" Flag: When testing an image, always use the `--rm` flag. Docker will delete the container immediately after you stop it.
+
+```bash
+docker run --rm nginx
+```
