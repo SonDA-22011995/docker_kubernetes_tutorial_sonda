@@ -25,6 +25,7 @@
       - [Example](#example)
     - [List containers](#list-containers)
       - [Example](#example-1)
+    - [Stop one or more running containers](#stop-one-or-more-running-containers)
   - [Container Lifecycle](#container-lifecycle)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
     - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
@@ -249,8 +250,9 @@ The `docker container ls` command is used to list the containers on your system.
 - Find Every Container on Your System
   By default, `ls` hides stopped containers. Use `-a` to see everything that is taking up space.
 
-````bash
+```bash
 docker container ls -a
+```
 
 ### Stop one or more running containers
 
@@ -259,7 +261,7 @@ docker container stop [OPTIONS] CONTAINER [CONTAINER...]
 
 # short-command
 docker stop
-````
+```
 
 ## Container Lifecycle
 
