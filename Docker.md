@@ -265,6 +265,8 @@ docker stop
 
 ## Container Lifecycle
 
+![Container Lifecycle](static/image/img0006.png)
+
 ## Docker Cleanup Commands Reference
 
 | Command                         | Description                                                                    | Risk Level           |
