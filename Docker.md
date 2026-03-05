@@ -22,8 +22,9 @@
 - [Mastering Containers](#mastering-containers)
   - [Running the container](#running-the-container)
     - [Create and run a new container from an image](#create-and-run-a-new-container-from-an-image)
-  - [Example](#example)
+      - [Example](#example)
     - [List containers](#list-containers)
+      - [Example](#example-1)
   - [Container Lifecycle](#container-lifecycle)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
     - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
@@ -199,11 +200,23 @@ docker run
 
 ---
 
-## Example
+#### Example
+
+- Running a Web Server
 
 ```bash
-docker run -d -p 80:80 --name prod-server -v /my/data:/usr/share/nginx/html nginx
+docker container run -d -p 8080:80 --name my-nginx nginx:stable-alpine
 ```
+
+Meaning: Run Nginx in the background (-d), connect your browser at localhost:8080 to the container's port 80 (-p), and name it my-nginx
+
+- Running a Temporary Task
+
+```bash
+docker container run --rm alpine ls -l
+```
+
+Meaning: Start a tiny Alpine container, list the files (ls -l), and immediately delete the container (--rm) so it doesn't waste disk space on your laptop.
 
 ### List containers
 
@@ -215,6 +228,38 @@ docker ps
 docker container ps
 docker container list
 ```
+
+- Docker Container LS Options
+
+The `docker container ls` command is used to list the containers on your system. By default, it only shows running containers, but these options allow you to see much more.
+
+| Option       | Full Name         | Description                                                     | Example                                                  |
+| :----------- | :---------------- | :-------------------------------------------------------------- | :------------------------------------------------------- |
+| `-a`         | **All**           | Shows all containers (including those that are stopped/exited). | `docker container ls -a`                                 |
+| `-q`         | **Quiet**         | Only displays the Container IDs (useful for scripts).           | `docker container ls -q`                                 |
+| `-l`         | **Latest**        | Shows the last container created (even if it's not running).    | `docker container ls -l`                                 |
+| `-n [X]`     | **Last X**        | Shows the last [X] containers created.                          | `docker container ls -n 3`                               |
+| `-s`         | **Size**          | Displays the total file size of each container.                 | `docker container ls -s`                                 |
+| `--filter`   | **Filter**        | Filters the list based on conditions (status, name, etc.).      | `docker container ls --filter "status=exited"`           |
+| `--format`   | **Format**        | Pretty-prints the output using a Go template.                   | `docker container ls --format "{{.Names}}: {{.Status}}"` |
+| `--no-trunc` | **No Truncation** | Shows the full Container ID and command without shortening.     | `docker container ls --no-trunc`                         |
+
+#### Example
+
+- Find Every Container on Your System
+  By default, `ls` hides stopped containers. Use `-a` to see everything that is taking up space.
+
+````bash
+docker container ls -a
+
+### Stop one or more running containers
+
+```bash
+docker container stop [OPTIONS] CONTAINER [CONTAINER...]
+
+# short-command
+docker stop
+````
 
 ## Container Lifecycle
 
