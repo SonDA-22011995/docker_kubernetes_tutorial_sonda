@@ -209,6 +209,7 @@ docker container run [OPTIONS] IMAGE [COMMAND] [ARG...]
 docker run
 ```
 
+- `docker container run` is a combination of two commands `docker container create` and `docker container start`
 - A quick reference guide for the most commonly used `docker run` options and flags.
 
 | Option      | Full Name       | Description                                              | Example                                             |
