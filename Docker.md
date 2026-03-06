@@ -267,6 +267,43 @@ docker stop
 
 ![Container Lifecycle](static/image/img0006.png)
 
+- The Creation Phase (Run vs. Create)
+  - `docker run`: A high-level command that combines two steps: docker create (preparing the container with an image) and docker start (executing it).
+  - Images & Tags: If no tag is specified (e.g., nginx), Docker defaults to the `:latest tag`.
+  - Independence: You can manually create a container without starting it, or start one that has already been created.
+
+- The Running Phase
+  - Once a container is in the Running State, you can interact with it using:
+
+  - `docker logs`: To view the output.
+
+  - `docker inspect`: To see detailed configuration.
+
+  - `docker exec`: To run commands inside the active container.
+
+- Pausing vs. Stopping
+  - There are different ways to halt a running container:
+
+  - `docker pause`: Suspends the container but keeps the memory contents intact. You can return to the running state via docker unpause.
+
+  - `docker stop`: Shuts down the container gracefully, clearing the memory.
+
+  - `docker kill`: Forcefully stops the container (SIGKILL). This is faster but risks data loss as the process cannot "wrap up" properly.
+
+- Exit Codes & Restart Policies
+  - When a container's main process (PID 1) finishes, it exits with a code:
+
+  - **Exit Code 0**: Success/Completed task.
+
+  - **Non-zero Exit Code**: An error occurred.
+
+  - **Restart Policies**: Docker can be configured to automatically restart containers if they exit with an error (though this is covered later in the course).
+
+- The Stopped & Removed Phases
+  - **Stopped State**: The container is no longer active but still exists on the disk. You won't see it with docker ps unless you use the -a (all) flag. You can still view its logs or use docker start to run it again.
+
+  - `docker rm`: This is the final step. It completely deletes the container and its contents, freeing up system resources. Once removed, you can no longer inspect it or view its logs.
+
 ## Docker Cleanup Commands Reference
 
 | Command                         | Description                                                                    | Risk Level           |
