@@ -321,6 +321,7 @@ docker logs nginx-server
 ### Execute a command in a running container
 
 - Syntax: `docker container exec [OPTIONS] CONTAINER COMMAND [ARG...]`
+- When you use the command `docker exec -it [container_id] /bin/bash` (or sh), you are opening a new interactive session inside the container. Here is how to exit `exist`
 
 ```bash
 docker container exec -it my_container sh -c "echo a && echo b"
