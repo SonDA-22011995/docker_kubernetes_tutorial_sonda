@@ -27,6 +27,7 @@
       - [Example](#example)
     - [List containers](#list-containers)
       - [Example](#example-1)
+    - [Fetch the logs of a container](#fetch-the-logs-of-a-container)
     - [Pause all processes within one or more containers](#pause-all-processes-within-one-or-more-containers)
     - [Unpause all processes within one or more containers](#unpause-all-processes-within-one-or-more-containers)
     - [Stop one or more running containers](#stop-one-or-more-running-containers)
@@ -281,6 +282,27 @@ The `docker container ls` command is used to list the containers on your system.
 ```bash
 docker container ls -a
 ```
+
+### Fetch the logs of a container
+
+- Syntax: `	docker container logs [OPTIONS] CONTAINER`
+- Use `Ctrl + C` to exit log when use `--follow` options
+
+```bash
+docker container logs nginx-server
+
+# or short-command
+docker logs nginx-server
+```
+
+| Option             | Default | Description                                                                                      |
+| :----------------- | :------ | :----------------------------------------------------------------------------------------------- |
+| `--details`        |         | Show extra details provided to logs.                                                             |
+| `-f, --follow`     |         | Follow log output in real-time (continuous stream).                                              |
+| `--since`          |         | Show logs since timestamp (e.g. `2013-01-02T13:23:37Z`) or relative (e.g. `42m` for 42 minutes). |
+| `-n, --tail`       | `all`   | Number of lines to show from the end of the logs.                                                |
+| `-t, --timestamps` |         | Show timestamps for each log line.                                                               |
+| `--until`          |         | **(API 1.35+)** Show logs before a timestamp or relative time.                                   |
 
 ### Pause all processes within one or more containers
 
