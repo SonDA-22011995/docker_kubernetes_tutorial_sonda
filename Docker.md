@@ -27,6 +27,8 @@
       - [Example](#example)
     - [List containers](#list-containers)
       - [Example](#example-1)
+    - [Pause all processes within one or more containers](#pause-all-processes-within-one-or-more-containers)
+    - [Unpause all processes within one or more containers](#unpause-all-processes-within-one-or-more-containers)
     - [Stop one or more running containers](#stop-one-or-more-running-containers)
   - [Container Lifecycle](#container-lifecycle)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
@@ -278,6 +280,37 @@ The `docker container ls` command is used to list the containers on your system.
 
 ```bash
 docker container ls -a
+```
+
+### Pause all processes within one or more containers
+
+- Syntax: `	docker container pause CONTAINER [CONTAINER...]`
+
+```bash
+docker container pause my_container
+
+# or short-command
+docker pause my_container
+```
+
+### Unpause all processes within one or more containers
+
+- Syntax: `docker container unpause CONTAINER [CONTAINER...]`
+
+```bash
+docker container unpause my_container
+
+# or short-command
+docker unpause my_container
+
+# unpause more containers
+docker unpause container_1 container_2 container_3
+
+docker unpause $(docker ps -q -f status=paused)
+
+# docker ps -q Extract only the container ID
+# -f status=paused The filter only selects containers that are in the Paused state
+# $(...): Use that list of IDs as input for the unpause command
 ```
 
 ### Stop one or more running containers
