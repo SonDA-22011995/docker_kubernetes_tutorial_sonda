@@ -21,6 +21,8 @@
     - [Summary Table: Local vs. Remote](#summary-table-local-vs-remote)
 - [Mastering Containers](#mastering-containers)
   - [Running the container](#running-the-container)
+    - [Download an image from a registry](#download-an-image-from-a-registry)
+    - [List images](#list-images)
     - [Create and run a new container from an image](#create-and-run-a-new-container-from-an-image)
       - [Example](#example)
     - [List containers](#list-containers)
@@ -173,6 +175,29 @@ This is where the actual "action" takes place. It contains:
 docker version
 
 # or docker --version
+```
+
+### Download an image from a registry
+
+- Syntax: `docker image pull [OPTIONS] NAME[:TAG|@DIGEST]`
+
+```bash
+docker image pull
+
+# or short-command
+docker pull
+```
+
+- Example: `docker pull nginx:1.29.5-perl`
+
+### List images
+
+```bash
+docker image ls
+
+# or short-command
+docker image list
+docker images
 ```
 
 ### Create and run a new container from an image
