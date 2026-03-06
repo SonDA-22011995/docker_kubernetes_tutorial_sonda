@@ -32,6 +32,7 @@
     - [Pause all processes within one or more containers](#pause-all-processes-within-one-or-more-containers)
     - [Unpause all processes within one or more containers](#unpause-all-processes-within-one-or-more-containers)
     - [Stop one or more running containers](#stop-one-or-more-running-containers)
+    - [Remove one or more containers](#remove-one-or-more-containers)
   - [Container Lifecycle](#container-lifecycle)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
     - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
@@ -366,6 +367,17 @@ docker container stop [OPTIONS] CONTAINER [CONTAINER...]
 
 # short-command
 docker stop
+```
+
+### Remove one or more containers
+
+- Syntax: `docker container rm [OPTIONS] CONTAINER [CONTAINER...]`
+
+```bash
+docker container rm redis
+
+# short-command
+docker rm redis
 ```
 
 ## Container Lifecycle
