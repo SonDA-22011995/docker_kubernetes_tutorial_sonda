@@ -23,6 +23,7 @@
   - [Running the container](#running-the-container)
     - [Download an image from a registry](#download-an-image-from-a-registry)
     - [List images](#list-images)
+    - [Remove one or more images](#remove-one-or-more-images)
     - [Create and run a new container from an image](#create-and-run-a-new-container-from-an-image)
       - [Example](#example)
     - [List containers](#list-containers)
@@ -203,6 +204,17 @@ docker image ls
 # or short-command
 docker image list
 docker images
+```
+
+### Remove one or more images
+
+- Syntax: docker image rm [OPTIONS] IMAGE [IMAGE...]
+
+```bash
+docker image rm test:latest
+
+# short-cut command
+docker rmi test:latest
 ```
 
 ### Create and run a new container from an image
