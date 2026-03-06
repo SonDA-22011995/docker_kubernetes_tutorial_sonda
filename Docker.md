@@ -333,6 +333,8 @@ docker container exec -i -t my_container sh -c "echo a && echo b"
 docker exec -it my_container sh -c "echo a && echo b"
 ```
 
+- `docker exec -it mycontainer sh`: The `-it` option allows you to access the container's shell and execute commands interactively.
+
 | Option              | Default | Description                                                |
 | :------------------ | :------ | :--------------------------------------------------------- |
 | `-d, --detach`      |         | **Detached mode:** Run command in the background.          |
