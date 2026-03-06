@@ -325,6 +325,10 @@ docker logs nginx-server
 ```bash
 docker container exec -it my_container sh -c "echo a && echo b"
 
+# same example above
+docker container exec -i -t my_container sh -c "echo a && echo b"
+
+
 # or short-command
 docker exec -it my_container sh -c "echo a && echo b"
 ```
