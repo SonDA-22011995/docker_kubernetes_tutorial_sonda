@@ -28,6 +28,7 @@
     - [List containers](#list-containers)
       - [Example](#example-1)
     - [Fetch the logs of a container](#fetch-the-logs-of-a-container)
+    - [Execute a command in a running container](#execute-a-command-in-a-running-container)
     - [Pause all processes within one or more containers](#pause-all-processes-within-one-or-more-containers)
     - [Unpause all processes within one or more containers](#unpause-all-processes-within-one-or-more-containers)
     - [Stop one or more running containers](#stop-one-or-more-running-containers)
@@ -303,6 +304,29 @@ docker logs nginx-server
 | `-n, --tail`       | `all`   | Number of lines to show from the end of the logs.                                                |
 | `-t, --timestamps` |         | Show timestamps for each log line.                                                               |
 | `--until`          |         | **(API 1.35+)** Show logs before a timestamp or relative time.                                   |
+
+### Execute a command in a running container
+
+- Syntax: `docker container exec [OPTIONS] CONTAINER COMMAND [ARG...]`
+
+```bash
+docker container exec -it my_container sh -c "echo a && echo b"
+
+# or short-command
+docker exec -it my_container sh -c "echo a && echo b"
+```
+
+| Option              | Default | Description                                                |
+| :------------------ | :------ | :--------------------------------------------------------- |
+| `-d, --detach`      |         | **Detached mode:** Run command in the background.          |
+| `--detach-keys`     |         | Override the key sequence for detaching a container.       |
+| `-e, --env`         |         | **(API 1.25+)** Set environment variables for the command. |
+| `--env-file`        |         | **(API 1.25+)** Read in a file of environment variables.   |
+| `-i, --interactive` |         | Keep STDIN open even if not attached.                      |
+| `--privileged`      |         | Give extended privileges to the command.                   |
+| `-t, --tty`         |         | Allocate a pseudo-TTY (often used as `-it`).               |
+| `-u, --user`        |         | Username or UID (format: `<name\|uid>[:<group\|gid>]`).    |
+| `-w, --workdir`     |         | **(API 1.35+)** Working directory inside the container.    |
 
 ### Pause all processes within one or more containers
 
