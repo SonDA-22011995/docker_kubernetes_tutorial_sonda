@@ -383,7 +383,7 @@ for n in {1..10} do; curl -4 localhost:8080 done;
 # You should see the logging output of Nginx in Terminal 1
 ```
 
-- To quit the container without stopping or killing it, we can use the **Ctrl + P + Ctrl + Q** key combination. This detaches us from the container while leaving it running in the background
+- **To quit the container without stopping or killing it**, we can use the **Ctrl + P + Ctrl + Q** key combination. This detaches us from the container while leaving it running in the background
 
 ### Pause all processes within one or more containers
 
