@@ -30,11 +30,13 @@
       - [Example](#example-1)
     - [Fetch the logs of a container](#fetch-the-logs-of-a-container)
     - [Execute a command in a running container](#execute-a-command-in-a-running-container)
+    - [Attaching to a running container](#attaching-to-a-running-container)
     - [Pause all processes within one or more containers](#pause-all-processes-within-one-or-more-containers)
     - [Unpause all processes within one or more containers](#unpause-all-processes-within-one-or-more-containers)
     - [Stop one or more running containers](#stop-one-or-more-running-containers)
     - [Remove one or more containers](#remove-one-or-more-containers)
   - [Container Lifecycle](#container-lifecycle)
+- [Managing Container Images](#managing-container-images)
 - [Other](#other)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
     - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
@@ -124,8 +126,6 @@ This is where the actual "action" takes place. It contains:
 - **Image Cache:** Local storage for downloaded images.
 - **Containers:** The actual running (or stopped) instances of your applications.
 
-[Image of Docker architecture showing Client, Host, and Registry interaction]
-
 #### C. Image Registry (Container Registry)
 
 - **Definition:** A stateless, highly scalable server-side application that stores and lets you distribute Docker images.
@@ -142,7 +142,7 @@ This is where the actual "action" takes place. It contains:
 2. **API Call:** CLI sends a request to the Docker Host's REST API.
 3. **Daemon Check:** \* If the image is **NOT** in the local cache, the Daemon pulls it from the **Registry**.
    - If the image **IS** in the local cache, it skips the download.
-4. **Execution:** The Daemon Host instantiates a new **Container** based o the image.
+4. **Execution:** The Daemon Host instantiates a new **Container** based on the image.
 
 > **Pro Tip:** Think of an **Image** as a **Class** (the blueprint) and a **Container** as an **Instance/Object** (the running entity).
 
@@ -349,6 +349,40 @@ docker exec -it my_container sh -c "echo a && echo b"
 | `-u, --user`        |         | Username or UID (format: `<name\|uid>[:<group\|gid>]`).    |
 | `-w, --workdir`     |         | **(API 1.35+)** Working directory inside the container.    |
 
+### Attaching to a running container
+
+- Use docker attach to attach your terminal's standard input, output, and error (or any combination of the three) to a running container using the container's ID or name. This lets you view its output or control it interactively, as though the commands were running directly in your terminal
+- Syntax:
+
+```bash
+docker container attach [OPTIONS] CONTAINER
+
+# shortcut command
+docker attach CONTAINER
+```
+
+- Example
+
+```bash
+# Run the Nginx web server as follows:
+docker run -d --name nginx -p 8080:80 nginx:alpine
+
+# Check nginx work
+curl -4 localhost:8080
+
+# Now, let’s attach our terminal to the Nginx container to observe what’s happening:
+docker container attach nginx
+```
+
+```bash
+# Once you are attached to the container, you will not see anything at first. But now, open another terminal, and in this new terminal window, repeat the curl command a few times, for example, using the following script:
+for n in {1..10} do; curl -4 localhost:8080 done;
+
+# You should see the logging output of Nginx
+```
+
+- To quit the container without stopping or killing it, we can use the **Ctrl + P + Ctrl + Q** key combination. This detaches us from the container while leaving it running in the background
+
 ### Pause all processes within one or more containers
 
 - Syntax: `	docker container pause CONTAINER [CONTAINER...]`
@@ -440,6 +474,8 @@ docker rm redis
   - **Stopped State**: The container is no longer active but still exists on the disk. You won't see it with docker ps unless you use the -a (all) flag. You can still view its logs or use docker start to run it again.
 
   - `docker rm`: This is the final step. It completely deletes the container and its contents, freeing up system resources. Once removed, you can no longer inspect it or view its logs.
+
+# Managing Container Images
 
 # Other
 
