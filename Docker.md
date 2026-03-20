@@ -35,6 +35,7 @@
     - [Stop one or more running containers](#stop-one-or-more-running-containers)
     - [Remove one or more containers](#remove-one-or-more-containers)
   - [Container Lifecycle](#container-lifecycle)
+- [Other](#other)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
     - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
 
@@ -439,6 +440,8 @@ docker rm redis
   - **Stopped State**: The container is no longer active but still exists on the disk. You won't see it with docker ps unless you use the -a (all) flag. You can still view its logs or use docker start to run it again.
 
   - `docker rm`: This is the final step. It completely deletes the container and its contents, freeing up system resources. Once removed, you can no longer inspect it or view its logs.
+
+# Other
 
 ## Docker Cleanup Commands Reference
 
