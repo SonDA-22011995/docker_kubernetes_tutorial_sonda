@@ -37,6 +37,9 @@
     - [Remove one or more containers](#remove-one-or-more-containers)
   - [Container Lifecycle](#container-lifecycle)
 - [Managing Container Images](#managing-container-images)
+  - [What are images?](#what-are-images)
+    - [The Layered Structure of an Image](#the-layered-structure-of-an-image)
+    - [Sourcing and Distribution](#sourcing-and-distribution)
 - [Other](#other)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
     - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
@@ -478,6 +481,33 @@ docker rm redis
   - `docker rm`: This is the final step. It completely deletes the container and its contents, freeing up system resources. Once removed, you can no longer inspect it or view its logs.
 
 # Managing Container Images
+
+## What are images?
+
+- An image is a self-contained, read-only template. Every container started from the same image will be identical at launch
+- A well-designed image must contain everything the application needs to run. While you can manually snapshot a modified container to create an image, the professional standard is using a **Dockerfile**.
+
+### The Layered Structure of an Image
+
+![The Layered Structure of an Image](static/image/img0007.png)
+
+- **Base Layer**: Usually a minimal Linux distribution (e.g., Alpine or Ubuntu).
+
+- **Runtime Environment**: The necessary engine for the code (e.g., Python, Node.js, or Java).
+
+- **Dependencies/Libraries**: External packages required by the app (e.g., requirements.txt for Python or npm packages for Node).
+
+- **Application Code**: Either the source code (for interpreted languages) or compiled binaries (for Go or Java).
+
+- **Configuration & Settings**: Default environment settings and ports, though these are often kept flexible for different environments.
+
+### Sourcing and Distribution
+
+- **Public Registries**: Docker Hub is the primary source for a vast collection of ready-made images.
+
+- **Private Registries**: Used by organizations to securely store proprietary software that should not be accessible to the public.
+
+- **Custom Builds**: The "real power" of Docker lies in using the docker build command and Dockerfiles to create tailored images that match specific application requirements.
 
 # Other
 
