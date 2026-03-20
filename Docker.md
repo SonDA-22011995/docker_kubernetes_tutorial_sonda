@@ -364,6 +364,7 @@ docker attach CONTAINER
 - Example
 
 ```bash
+# Terminal 1
 # Run the Nginx web server as follows:
 docker run -d --name nginx -p 8080:80 nginx:alpine
 
@@ -375,10 +376,11 @@ docker container attach nginx
 ```
 
 ```bash
+# Terminal 2
 # Once you are attached to the container, you will not see anything at first. But now, open another terminal, and in this new terminal window, repeat the curl command a few times, for example, using the following script:
 for n in {1..10} do; curl -4 localhost:8080 done;
 
-# You should see the logging output of Nginx
+# You should see the logging output of Nginx in Terminal 1
 ```
 
 - To quit the container without stopping or killing it, we can use the **Ctrl + P + Ctrl + Q** key combination. This detaches us from the container while leaving it running in the background
