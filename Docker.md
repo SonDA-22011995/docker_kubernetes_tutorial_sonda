@@ -38,6 +38,7 @@
   - [Container Lifecycle](#container-lifecycle)
 - [Managing Container Images](#managing-container-images)
   - [What are images?](#what-are-images)
+    - [Example of a modified container to create an image](#example-of-a-modified-container-to-create-an-image)
     - [The Layered Structure of an Image](#the-layered-structure-of-an-image)
     - [Sourcing and Distribution](#sourcing-and-distribution)
 - [Other](#other)
@@ -486,6 +487,28 @@ docker rm redis
 
 - An image is a self-contained, read-only template. Every container started from the same image will be identical at launch
 - A well-designed image must contain everything the application needs to run. While you can manually snapshot a modified container to create an image, the professional standard is using a **Dockerfile**.
+
+### Example of a modified container to create an image
+
+- Step 1: Run container
+
+```bash
+docker run -it ubuntu bash
+```
+
+- Step 2: In container terminal
+
+```bash
+apt update
+apt install -y vim
+exit
+```
+
+- Step 3: Snapshot a container to create a new image called my-ubuntu-with-vim
+
+```bash
+docker commit <container_id> my-ubuntu-with-vim
+```
 
 ### The Layered Structure of an Image
 
