@@ -82,7 +82,7 @@
 ### Docker Hub
 
 - Docker Hub is the most popular service for finding and sharing container images
-- Docker images can be uploaded and shared inside a team, an organization, or with the wider publi
+- Docker images can be uploaded and shared inside a team, an organization, or with the wider public
 
 ### Docker Enterprise Edition
 
