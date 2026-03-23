@@ -38,11 +38,14 @@
     - [Example of a modified container to create an image](#example-of-a-modified-container-to-create-an-image)
     - [The Layered Structure of an Image](#the-layered-structure-of-an-image)
     - [Sourcing and Distribution](#sourcing-and-distribution)
+    - [Understanding Image Tags \& Variants](#understanding-image-tags--variants)
   - [Container Registries](#container-registries)
   - [Docker image CLI](#docker-image-cli)
     - [Download an image from a registry](#download-an-image-from-a-registry)
     - [List images](#list-images)
     - [Remove one or more images](#remove-one-or-more-images)
+    - [The Build, Tag, and Push Workflow](#the-build-tag-and-push-workflow)
+  - [Repository Management](#repository-management)
   - [Dockerfile](#dockerfile)
 - [Other](#other)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
@@ -501,6 +504,17 @@ docker commit <container_id> my-ubuntu-with-vim
 
 - **Custom Builds**: The "real power" of Docker lies in using the docker build command and Dockerfiles to create tailored images that match specific application requirements.
 
+### Understanding Image Tags & Variants
+
+- When selecting an image (like Node.js) on Docker Hub, you will encounter several naming conventions that impact performance and security:
+  - LTS (Long Term Support): Stable versions recommended for production.
+
+  - Slim: A "stripped-down" version containing only the essentials to run the application, resulting in a much smaller footprint (e.g., 68MB vs 400MB+).
+
+  - Alpine: Based on the incredibly small Alpine Linux distribution. These are often the smallest (~45MB) and typically have the fewest security vulnerabilities.
+
+  - Version Specifics: Tags often include OS codenames (e.g., Bookworm, Bullseye) or specific semantic versions (e.g., 20.15).
+
 ## Container Registries
 
 - Container Registries are storing and managing Docker images
@@ -560,7 +574,30 @@ docker image rm test:latest
 
 # short-cut command
 docker rmi test:latest
+
+# remove all images
+docker image rm $(docker image ls -aq)
 ```
+
+| Option          | Default | Description                |
+| --------------- | ------- | -------------------------- |
+| `-f`, `--force` |         | Force removal of the image |
+
+### The Build, Tag, and Push Workflow
+
+- This is the core "CI/CD" cycle used by developers to share their work:
+  - **Login**: `docker login`
+  - **Build**: Create an image from a Dockerfile using `docker image build -t [name]`. Short-command `docker build -t [name]`.
+
+  - **Tag**: **Re-tag** the image to match a registry format: `docker image tag [local-name] [username]/[repository]:[version]`. Short-command `docker tag [local-name] [username]/[repository]:[version]`.
+
+  - **Push**: Upload the image to Docker Hub using `docker image push [username]/[repository]:[version]`.
+
+## Repository Management
+
+- Public vs. Private: Docker Hub repositories are public by default. While you can make them private, the free tier typically limits you to one private repo.
+
+- Cleanup: It is good practice to delete unused or "test" repositories from Docker Hub via the settings menu to keep your registry clean.
 
 ## Dockerfile
 
