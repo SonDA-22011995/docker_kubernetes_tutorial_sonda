@@ -48,6 +48,7 @@
   - [Repository Management](#repository-management)
   - [Dockerfile](#dockerfile)
     - [Key Benefits of Using Dockerfiles](#key-benefits-of-using-dockerfiles)
+    - [Hands-on: Creating first Dockerfile for Nginx](#hands-on-creating-first-dockerfile-for-nginx)
 - [Other](#other)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
     - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
@@ -299,7 +300,7 @@ docker logs nginx-server
 ### Execute a command in a running container
 
 - Syntax: `docker container exec [OPTIONS] CONTAINER COMMAND [ARG...]`
-- When you use the command `docker exec -it [container_id] /bin/bash` (or sh), you are opening a new interactive session inside the container. Here is how to exit `exist` | `Ctrl + D`
+- When you use the command `docker exec -it [container_id] /bin/bash` (or sh), you are opening a new interactive session inside the container. Here is how to exit `exit` | `Ctrl + D`
 
 ```bash
 docker container exec -it my_container sh -c "echo a && echo b"
@@ -611,6 +612,50 @@ docker image rm $(docker image ls -aq)
 | Automation      | Eliminate human error by automating dozens of manual setup steps.                |
 | Transparency    | Serves as "living documentation" that shows exactly how an image is constructed. |
 | Optimization    | Allows fine-tuning for security (e.g., using Alpine) and performance (caching).  |
+
+### Hands-on: Creating first Dockerfile for Nginx
+
+- Create `Dockerfile` in Dockerfile_Nginx folder
+
+```bash
+# Defines the base image.
+FROM nginx:1.28.2
+
+# Updates the package list inside the container
+RUN apt-get update
+
+# Installs the Vim editor
+#  -y, --yes, --assume-yes: Automatic yes to prompts; assume "yes" as answer to all prompts and run non-interactively
+# The -y flag is mandatory because Docker builds are automated and cannot pause to ask for user confirmation
+RUN apt-get -y install vim
+```
+
+- Building the Image
+
+```bash
+
+docker build -t web-server-image .
+
+# -t, --tag: Name and optionally a tag in the name:tag format
+# The Dot (.): Tells Docker to look for the Dockerfile in the current directory
+```
+
+- Running container
+
+```bash
+docker container run -d --rm --name web_server web-server-image
+```
+
+- Verify that the Vim editor is installed in the container.
+
+```bash
+
+docker exec -it web_server sh
+
+# or docker exec -it web_server /bin/bash
+```
+
+- After that, type `vim` to open the Vim editor
 
 # Other
 
