@@ -21,9 +21,6 @@
     - [Summary Table: Local vs. Remote](#summary-table-local-vs-remote)
 - [Mastering Containers](#mastering-containers)
   - [Running the container](#running-the-container)
-    - [Download an image from a registry](#download-an-image-from-a-registry)
-    - [List images](#list-images)
-    - [Remove one or more images](#remove-one-or-more-images)
     - [Create and run a new container from an image](#create-and-run-a-new-container-from-an-image)
       - [Example](#example)
     - [List containers](#list-containers)
@@ -42,6 +39,11 @@
     - [The Layered Structure of an Image](#the-layered-structure-of-an-image)
     - [Sourcing and Distribution](#sourcing-and-distribution)
   - [Container Registries](#container-registries)
+  - [Docker image CLI](#docker-image-cli)
+    - [Download an image from a registry](#download-an-image-from-a-registry)
+    - [List images](#list-images)
+    - [Remove one or more images](#remove-one-or-more-images)
+  - [Dockerfile](#dockerfile)
 - [Other](#other)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
     - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
@@ -187,40 +189,6 @@ This is where the actual "action" takes place. It contains:
 docker version
 
 # or docker --version
-```
-
-### Download an image from a registry
-
-- Syntax: `docker image pull [OPTIONS] NAME[:TAG|@DIGEST]`
-
-```bash
-docker image pull
-
-# or short-command
-docker pull
-```
-
-- Example: `docker pull nginx:1.29.5-perl`
-
-### List images
-
-```bash
-docker image ls
-
-# or short-command
-docker image list
-docker images
-```
-
-### Remove one or more images
-
-- Syntax: docker image rm [OPTIONS] IMAGE [IMAGE...]
-
-```bash
-docker image rm test:latest
-
-# short-cut command
-docker rmi test:latest
 ```
 
 ### Create and run a new container from an image
@@ -547,6 +515,54 @@ docker commit <container_id> my-ubuntu-with-vim
   - Public Registries: Open to everyone and host a vast collection of images from various sources. Docker Hub is the most prominent example.
   - Private Registries: Used for storing proprietary or sensitive images and offer granular access
     control.
+
+## Docker image CLI
+
+### Download an image from a registry
+
+- Syntax: `docker image pull [OPTIONS] NAME[:TAG|@DIGEST]`
+
+```bash
+docker image pull
+
+# or short-command
+docker pull
+```
+
+- Example: `docker pull nginx:1.29.5-perl`
+
+### List images
+
+```bash
+docker image ls
+
+# or short-command
+docker image list
+docker images
+```
+
+| Option           | Default | Description                                                                                                                                                                                                                                                                                                                                                  |
+| ---------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `-a`, `--all`    |         | Show all images (default hides intermediate and dangling images)                                                                                                                                                                                                                                                                                             |
+| `--digests`      |         | Show digests                                                                                                                                                                                                                                                                                                                                                 |
+| `-f`, `--filter` |         | Filter output based on conditions provided                                                                                                                                                                                                                                                                                                                   |
+| `--format`       |         | Format output using a custom template:<br>`table`: Print output in table format with column headers (default)<br>`table TEMPLATE`: Print output in table format using the given Go template<br>`json`: Print in JSON format<br>`TEMPLATE`: Print output using the given Go template.<br>Refer to https://docs.docker.com/go/formatting/ for more information |
+| `--no-trunc`     |         | Don't truncate output                                                                                                                                                                                                                                                                                                                                        |
+| `-q`, `--quiet`  |         | Only show image IDs                                                                                                                                                                                                                                                                                                                                          |
+| `--tree`         |         | API 1.47+ experimental (CLI). List multi-platform images as a tree (EXPERIMENTAL)                                                                                                                                                                                                                                                                            |
+
+### Remove one or more images
+
+- Syntax: docker image rm [OPTIONS] IMAGE [IMAGE...]
+
+```bash
+docker image rm test:latest
+
+# short-cut command
+docker rmi test:latest
+```
+
+## Dockerfile
 
 # Other
 
