@@ -588,7 +588,7 @@ docker image rm $(docker image ls -aq)
 
 - This is the core "CI/CD" cycle used by developers to share their work:
   - **Login**: `docker login -u [username]`
-  - **Build**: Create an image from a Dockerfile using `docker image build -t [name]`. Short-command `docker build -t [name]`.
+  - **Build**: Create an image from a Dockerfile using `docker image build -t [name] PATH | URL`. Short-command `docker build -t [name]`.
 
   - **Tag**: **Re-tag** the image to match a registry format: `docker image tag [local-name] [username]/[repository]:[version]`. Short-command `docker tag [local-name] [username]/[repository]:[version]`.
 
