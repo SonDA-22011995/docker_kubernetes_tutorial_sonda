@@ -41,6 +41,7 @@
     - [Example of a modified container to create an image](#example-of-a-modified-container-to-create-an-image)
     - [The Layered Structure of an Image](#the-layered-structure-of-an-image)
     - [Sourcing and Distribution](#sourcing-and-distribution)
+  - [Container Registries](#container-registries)
 - [Other](#other)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
     - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
@@ -531,6 +532,21 @@ docker commit <container_id> my-ubuntu-with-vim
 - **Private Registries**: Used by organizations to securely store proprietary software that should not be accessible to the public.
 
 - **Custom Builds**: The "real power" of Docker lies in using the docker build command and Dockerfiles to create tailored images that match specific application requirements.
+
+## Container Registries
+
+- Container Registries are storing and managing Docker images
+
+- Container registries offer a multitude of benefits:
+  - Collaboration: Share your images with teammates, clients, or the wider community.
+  - Versioning: Track different versions of your images for easy rollback and updates.
+  - Security: Private registries provide a secure environment for storing sensitive images.
+  - Automation: Automate image building and deployment as part of your CI/CD pipeline.
+
+- Types of Container Registries:
+  - Public Registries: Open to everyone and host a vast collection of images from various sources. Docker Hub is the most prominent example.
+  - Private Registries: Used for storing proprietary or sensitive images and offer granular access
+    control.
 
 # Other
 
