@@ -47,6 +47,7 @@
     - [The Build, Tag, and Push Workflow](#the-build-tag-and-push-workflow)
   - [Repository Management](#repository-management)
   - [Dockerfile](#dockerfile)
+    - [Key Benefits of Using Dockerfiles](#key-benefits-of-using-dockerfiles)
 - [Other](#other)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
     - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
@@ -600,6 +601,16 @@ docker image rm $(docker image ls -aq)
 - Cleanup: It is good practice to delete unused or "test" repositories from Docker Hub via the settings menu to keep your registry clean.
 
 ## Dockerfile
+
+### Key Benefits of Using Dockerfiles
+
+| Benefit         | Description                                                                      |
+| --------------- | -------------------------------------------------------------------------------- |
+| Customization   | Create images that perfectly match specific application requirements.            |
+| Reproducibility | Ensure that any developer can recreate the exact same environment anywhere.      |
+| Automation      | Eliminate human error by automating dozens of manual setup steps.                |
+| Transparency    | Serves as "living documentation" that shows exactly how an image is constructed. |
+| Optimization    | Allows fine-tuning for security (e.g., using Alpine) and performance (caching).  |
 
 # Other
 
