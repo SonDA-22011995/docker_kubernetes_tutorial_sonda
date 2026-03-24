@@ -49,6 +49,7 @@
   - [Dockerfile](#dockerfile)
     - [Key Benefits of Using Dockerfiles](#key-benefits-of-using-dockerfiles)
     - [Hands-on: Creating first Dockerfile for Nginx](#hands-on-creating-first-dockerfile-for-nginx)
+    - [Copying local files into our image](#copying-local-files-into-our-image)
 - [Other](#other)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
     - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
@@ -615,7 +616,7 @@ docker image rm $(docker image ls -aq)
 
 ### Hands-on: Creating first Dockerfile for Nginx
 
-- Create `Dockerfile` in Dockerfile_Nginx folder
+- Create `Dockerfile` in `Dockerfile_Nginx` folder
 
 ```bash
 # Defines the base image.
@@ -656,6 +657,33 @@ docker exec -it web_server sh
 ```
 
 - After that, type `vim` to open the Vim editor
+
+### Copying local files into our image
+
+- Creating a Local Version: A new `Dockerfile_Nginx/index.html` file is created in the local project directory with custom content
+
+- The `COPY` Instruction: The `Dockerfile` is updated to include
+
+```bash
+FROM nginx:1.28.2
+
+RUN apt-get update
+RUN apt-get -y install vim
+
+# This moves the file from the build context (the local directory) into the image.
+# The path /usr/share/nginx/html/index.html is the location where index.html is stored in the container.
+COPY index.html /usr/share/nginx/html/index.html
+RUN chown nginx:nginx /usr/share/nginx/html/index.html
+```
+
+- Handling Permissions: A common issue is identified where the copied file results in a 403 Forbidden error. This happens because the file's local ownership doesn't match the container's nginx user.Fixing Ownership:
+
+```bash
+RUN chown nginx:nginx /usr/share/nginx/html/index.html
+
+# A better way is to use
+# COPY --chown=nginx:nginx index.html /usr/share/nginx/html/index.html
+```
 
 # Other
 
