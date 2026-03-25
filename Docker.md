@@ -50,6 +50,9 @@
     - [Key Benefits of Using Dockerfiles](#key-benefits-of-using-dockerfiles)
     - [Hands-on: Creating first Dockerfile for Nginx](#hands-on-creating-first-dockerfile-for-nginx)
     - [Copying local files into our image](#copying-local-files-into-our-image)
+    - [Hands-on: Creating Express.js in Docker](#hands-on-creating-expressjs-in-docker)
+      - [First, initialize the project](#first-initialize-the-project)
+      - [After initializing the project](#after-initializing-the-project)
 - [Other](#other)
   - [Docker Cleanup Commands Reference](#docker-cleanup-commands-reference)
     - [💡 Best Practices for Windows Developers](#-best-practices-for-windows-developers)
@@ -684,6 +687,38 @@ RUN chown nginx:nginx /usr/share/nginx/html/index.html
 # A better way is to use
 # COPY --chown=nginx:nginx index.html /usr/share/nginx/html/index.html
 ```
+
+### Hands-on: Creating Express.js in Docker
+
+#### First, initialize the project
+
+- Dockerfile
+
+```bash
+FROM node:24-alpine AS installer
+WORKDIR /app
+```
+
+- Build image
+
+```bash
+# docker image build -t [name] PATH
+docker image build -t node:24-alpine .
+```
+
+- Run docker container
+
+```bash
+docker run -it --rm -v "$(pwd):/app" --entrypoint sh node:24-alpine
+```
+
+- Install node.js package
+
+```bash
+npm install express@4.19.2 body-parser@1.20.2 --save-exact
+```
+
+#### After initializing the project
 
 # Other
 
