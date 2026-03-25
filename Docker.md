@@ -756,12 +756,12 @@ COPY . .
 EXPOSE 3000
 
 # Command to start the app
-# CMD ["node", "start"] if you declare
+# CMD ["npm", "start"] if you declare
 # "scripts": {
 #    "start": "node index.js"
 #  },
 # or CMD ["node", "index.js"]
-CMD ["node", "start"]
+CMD ["npm", "start"]
 # should be added at the end to make the container functional.
 ```
 
