@@ -720,6 +720,57 @@ npm install express@4.19.2 body-parser@1.20.2 --save-exact
 
 #### After initializing the project
 
+- Dockerfile
+
+```bash
+# Stage 1: Build (Installation Phase)
+# Use a lightweight Node.js 24 image based on Alpine Linux as the base for the build stage
+FROM node:24-alpine AS installer
+
+# Set the working directory inside the container to /app
+WORKDIR /app
+
+# Copy dependency definition files (package.json and package-lock.json) first
+# This is done separately to take advantage of Docker Layer Caching
+COPY package*.json ./
+
+# Install all project dependencies defined in package.json
+RUN npm install
+
+
+# Stage 2: Production (Runtime Phase)
+# Start a fresh stage with the same lightweight image to keep the final image size small
+FROM node:24-alpine
+
+# Set the working directory for the production environment
+WORKDIR /app
+
+# Copy only the installed node_modules from the 'installer' stage
+# This ignores unnecessary build tools or caches from the previous stage
+COPY --from=installer /app/node_modules ./node_modules
+
+# Copy the rest of the application source code from the local machine to the container
+COPY . .
+
+# Document that the container intends to listen on port 3000 at runtime
+EXPOSE 3000
+
+# Command to start the app
+# CMD ["node", "start"] if you declare
+# "scripts": {
+#    "start": "node index.js"
+#  },
+# or CMD ["node", "index.js"]
+CMD ["node", "start"]
+# should be added at the end to make the container functional.
+```
+
+- Docker container run
+
+```bash
+docker run -it --rm -p 3000:3000 -v "$(pwd):/app" --name node-app --entrypoint sh node:24-alpine
+```
+
 # Other
 
 ## Docker Cleanup Commands Reference
