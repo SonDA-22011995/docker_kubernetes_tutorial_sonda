@@ -51,6 +51,10 @@
     - [Hands-on: Creating first Dockerfile for Nginx](#hands-on-creating-first-dockerfile-for-nginx)
     - [Copying local files into our image](#copying-local-files-into-our-image)
     - [Sets the working directory](#sets-the-working-directory)
+    - [`RUN` command](#run-command)
+    - [`CMD` command](#cmd-command)
+    - [`RUN` vs. `CMD` (The Golden Rule)](#run-vs-cmd-the-golden-rule)
+    - [`EXPOSE` command](#expose-command)
     - [Hands-on: Creating Express.js in Docker](#hands-on-creating-expressjs-in-docker)
       - [First, initialize the project](#first-initialize-the-project)
       - [After initializing the project](#after-initializing-the-project)
@@ -689,7 +693,7 @@ RUN chown nginx:nginx /usr/share/nginx/html/index.html
 # COPY --chown=nginx:nginx index.html /usr/share/nginx/html/index.html
 ```
 
-- You can use Wildcard/Globbing Linux in `COPY` command Dockefile
+- You can use Linux wildcards (globbing) in the Dockerfile `COPY` command.
 
 | Wildcard        | Meaning                                                   |
 | :-------------- | :-------------------------------------------------------- |
@@ -701,6 +705,12 @@ RUN chown nginx:nginx /usr/share/nginx/html/index.html
 
 ```bash
 COPY pack*.json ./
+```
+
+- `COPY --from`: By default, the `COPY` instruction copies files from the build context. The `COPY --from` flag lets you copy files from an image, a build stage, or a named context instead
+
+```bash
+COPY --from=installer /app/node_modules ./node_modules
 ```
 
 ### Sets the working directory
@@ -715,6 +725,76 @@ WORKDIR b
 WORKDIR c
 RUN pwd # The output of the final pwd command in this Dockerfile would be /a/b/c
 ```
+
+### `RUN` command
+
+- The `RUN` instruction will execute any commands to create a new layer on top of the current image. The added layer is used in the next step in the Dockerfile
+- Syntax
+
+```bash
+# Shell form:
+RUN [OPTIONS] <command> ...
+# Exec form:
+RUN [OPTIONS] [ "<command>", ... ]
+```
+
+- Common Use Cases
+  - Install packages: `RUN apt-get update && apt-get install -y python3`
+  - Create directories: `RUN mkdir /app`
+  - Download files: `RUN wget https://example.com/data.tar.gz`
+  - Set permissions: `RUN chmod +x script.sh`
+  - Install dependencies: `RUN npm install or RUN pip install -r requirements.txt`
+
+### `CMD` command
+
+- The `CMD` instruction sets the command to be executed when running a container from an image
+- Syntax
+
+```bash
+CMD ["executable","param1","param2"] # exec form
+CMD command param1 param2 # shell form
+```
+
+- `CMD` is a default. If a user provides a command at the end of docker run, it will completely replace the `CMD` you wrote in the Dockerfile.
+
+- Example
+
+```bash
+CMD node index.js
+
+# or CMD ["node", "server.js"]
+```
+
+### `RUN` vs. `CMD` (The Golden Rule)
+
+- It is very common to confuse these two. Here is the simple distinction:
+
+- `RUN`: Executes during the Build process. It adds software to the image.
+
+- `CMD`: Executes only when the Container starts. It defines the "default" behavior of the container.
+
+### `EXPOSE` command
+
+- The `EXPOSE` instruction informs Docker that the container listens on the specified network ports at runtime.
+
+- The Golden Rule: `EXPOSE` does not actually publish the port to your host machine (your laptop).
+
+- To publish the port when running the container, use the `-p` flag on `docker container run` to publish and map one or more ports
+
+- Syntax
+
+```bash
+EXPOSE 80 # Defaults to TCP
+
+EXPOSE 80/udp
+
+EXPOSE 80 443 8080 # You can expose multiple ports at once
+```
+
+- If `EXPOSE` doesn't open the port to your browser, what is it for?
+  - **Documentation**: it serves as a type of "metadata." When someone else uses your image, they can run docker inspect to see which ports they are supposed to map.
+  - **Inter-container Communication**: If two containers are in the same Docker network, they can talk to each other using the exposed ports without any extra configuration.
+  - The `-P` (Uppercase) Flag: If you run a container with `docker container run -P`, Docker will automatically map all `EXPOSE` ports in the Dockerfile to random high-order ports on your host machine.
 
 ### Hands-on: Creating Express.js in Docker
 
