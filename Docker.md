@@ -50,6 +50,7 @@
     - [Key Benefits of Using Dockerfiles](#key-benefits-of-using-dockerfiles)
     - [Hands-on: Creating first Dockerfile for Nginx](#hands-on-creating-first-dockerfile-for-nginx)
     - [Copying local files into our image](#copying-local-files-into-our-image)
+    - [Sets the working directory](#sets-the-working-directory)
     - [Hands-on: Creating Express.js in Docker](#hands-on-creating-expressjs-in-docker)
       - [First, initialize the project](#first-initialize-the-project)
       - [After initializing the project](#after-initializing-the-project)
@@ -686,6 +687,33 @@ RUN chown nginx:nginx /usr/share/nginx/html/index.html
 
 # A better way is to use
 # COPY --chown=nginx:nginx index.html /usr/share/nginx/html/index.html
+```
+
+- You can use Wildcard/Globbing Linux in `COPY` command Dockefile
+
+| Wildcard        | Meaning                                                   |
+| :-------------- | :-------------------------------------------------------- |
+| `*`             | Matches **any** number of characters (including zero)     |
+| `?`             | Matches any **single** character                          |
+| `[characters]`  | Matches any character that is a **member of the set**     |
+| `[!characters]` | Matches any character that is **NOT** a member of the set |
+| `[[:class:]]`   | Matches any character in a **predefined class**           |
+
+```bash
+COPY pack*.json ./
+```
+
+### Sets the working directory
+
+- The `WORKDIR` instruction sets the working directory for any `RUN`, `CMD`, `ENTRYPOINT`, `COPY` and `ADD` instructions that follow it in the Dockerfile.
+- If the WORKDIR doesn't exist, it will be created even if it's not used in any subsequent Dockerfile instruction.
+- The `WORKDIR` instruction can be used multiple times in a Dockerfile. If a relative path is provided, it will be relative to the path of the previous `WORKDIR` instruction
+
+```bash
+WORKDIR /a
+WORKDIR b
+WORKDIR c
+RUN pwd # The output of the final pwd command in this Dockerfile would be /a/b/c
 ```
 
 ### Hands-on: Creating Express.js in Docker
