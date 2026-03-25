@@ -794,7 +794,7 @@ EXPOSE 80 443 8080 # You can expose multiple ports at once
 - If `EXPOSE` doesn't open the port to your browser, what is it for?
   - **Documentation**: it serves as a type of "metadata." When someone else uses your image, they can run docker inspect to see which ports they are supposed to map.
   - **Inter-container Communication**: If two containers are in the same Docker network, they can talk to each other using the exposed ports without any extra configuration.
-  - The `-P` (Uppercase) Flag: If you run a container with `docker container run -P`, Docker will automatically map all `EXPOSE` ports in the Dockerfile to random high-order ports on your host machine.
+  - The `-P` (Uppercase) Flag: If you run a container with `docker container run -P`, Docker will automatically map all `EXPOSE` ports in the Dockerfile to random high-order ports (49152 - 65535) on your host machine.
 
 ### Hands-on: Creating Express.js in Docker
 
