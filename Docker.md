@@ -421,6 +421,9 @@ docker container rm redis
 
 # short-command
 docker rm redis
+
+# remove all container
+docker rm -f $(docker ps -aq)
 ```
 
 ## Container Lifecycle
